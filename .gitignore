@@ -1,6 +1,9 @@
 /target
-/pricepulse.db
-/pricepulse.db-journal
-/pricepulse.db-shm
-/pricepulse.db-wal
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
 /config/config.toml
+.env
+.env.*
+
