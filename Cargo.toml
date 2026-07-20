@@ -8,7 +8,7 @@ edition = "2021"
 tokio = { version = "1.38", features = ["full"] }
 
 # HTTP Client
-reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json", "gzip", "brotli"] }
 
 # HTML Parsing
 scraper = "0.19"
@@ -39,3 +39,16 @@ regex = "1.10"
 # Terminal Aesthetics & Interactivity
 colored = "2.1"
 indicatif = { version = "0.17", features = ["tokio"] }
+
+# Web Framework & API
+axum = "0.7"
+tower-http = { version = "0.5", features = ["cors", "trace"] }
+
+# Authentication & Security
+jsonwebtoken = "9.3"
+argon2 = "0.5"
+oauth2 = "4.4"
+
+# Email Notifications
+lettre = { version = "0.11", default-features = false, features = ["builder", "smtp-transport", "tokio1", "tokio1-rustls", "ring", "webpki-roots"] }
+

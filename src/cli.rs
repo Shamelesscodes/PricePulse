@@ -56,4 +56,15 @@ pub enum Commands {
         #[arg(long)]
         once: bool,
     },
+
+    /// Start the PricePulse REST API web server
+    Serve {
+        /// Port to bind the HTTP server to (overrides config)
+        #[arg(short, long)]
+        port: Option<u16>,
+
+        /// Disable auto-starting background price monitoring scheduler
+        #[arg(long)]
+        no_scheduler: bool,
+    },
 }

@@ -1,0 +1,25 @@
+check_interval = 30
+database = "pricepulse.db"
+max_concurrent_requests = 20
+user_agent = "PricePulse/1.0"
+
+[email]
+enabled = false
+smtp_host = "smtp.gmail.com"
+smtp_port = 587
+smtp_username = "your-email@gmail.com"
+smtp_password = "your-google-app-password"
+from_email = "your-email@gmail.com"
+to_email = "your-destination-email@gmail.com"
+
+[api]
+host = "0.0.0.0"
+port = 3000
+jwt_secret = "your_secure_jwt_secret_key"
+auto_start_scheduler = true
+
+[google_oauth]
+client_id = "YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+client_secret = "YOUR_GOOGLE_CLIENT_SECRET"
+redirect_url = "http://localhost:3000/api/auth/google/callback"
+

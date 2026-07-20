@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  pricepulse-api:
+    build: .
+    container_name: pricepulse_api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+      - ./config:/app/config
+    environment:
+      - RUST_LOG=info
+    restart: unless-stopped

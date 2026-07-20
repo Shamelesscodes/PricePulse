@@ -50,6 +50,7 @@ impl Scheduler {
             let sem = Arc::clone(&semaphore);
             let client = self.client.clone();
             let user_agent = self.config.user_agent.clone();
+            let email_cfg = self.config.email.clone();
 
             let task = tokio::spawn(async move {
                 // Acquire concurrency permit
@@ -73,9 +74,9 @@ impl Scheduler {
 
                                 if let Some(last) = last_record {
                                     if scraped.price < last.price {
-                                        notify_price_drop(&product, last.price, scraped.price, &scraped.currency);
+                                        notify_price_drop(&product, last.price, scraped.price, &scraped.currency, email_cfg.as_ref()).await;
                                     } else if scraped.price > last.price {
-                                        notify_price_increase(&product, last.price, scraped.price, &scraped.currency);
+                                        notify_price_increase(&product, last.price, scraped.price, &scraped.currency).await;
                                     }
                                 } else {
                                     info!("Initial price recorded for '{}': {}{}", product.title, scraped.currency, scraped.price);
@@ -91,7 +92,7 @@ impl Scheduler {
                                         };
 
                                         if should_alert {
-                                            notify_target_reached(&product, scraped.price, target, &scraped.currency);
+                                            notify_target_reached(&product, scraped.price, target, &scraped.currency, email_cfg.as_ref()).await;
                                             if let Err(e) = repo.add_alert(product.id.unwrap(), scraped.price).await {
                                                 error!("Failed to save sent alert history: {}", e);
                                             }
