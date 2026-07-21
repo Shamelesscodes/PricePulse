@@ -182,6 +182,7 @@ impl Repository {
         Ok(res.rows_affected())
     }
 
+    #[allow(dead_code)]
     pub async fn get_product_by_id(&self, id: i64) -> Result<Option<Product>, sqlx::Error> {
         sqlx::query_as::<_, Product>(
             "SELECT id, user_id, title, url, website, target_price, active, created_at FROM products WHERE id = ?",
